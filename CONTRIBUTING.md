@@ -7,7 +7,7 @@ you add yourself to the list of contributors, found in [CONTRIBUTORS.md].
 To do this, after you've set up the development environment, run:
 
 ```
-yarn all-contributors
+pnpm all-contributors
 ```
 
 And follow the on-screen prompts.
@@ -24,13 +24,13 @@ git installed. Then, you can run these commands to get the repository set up:
 ```
 git clone git@github.com:cssnano/cssnano.git
 cd cssnano
-yarn install
+pnpm install
 ```
 
 You can run the tests with:
 
 ```
-yarn test
+pnpm test
 ```
 
 We recommend that you look in the issue tracker to find anything tagged
@@ -47,26 +47,34 @@ To help us generate the changelog, follow the [conventional commits](https://www
 ### Documentation
 
 The documentation website is also included with the repository, under `/site`.
-It runs [docusaurus](https://docusaurus.io) and requires a separate `yarn install`
+It runs [docusaurus](https://docusaurus.io) and requires a separate `pnpm install`
 to pull down the dependencies. You can then browse the documentation locally
-by running `yarn start`.
+by running `pnpm start`.
 
 Note that some of the documentation is automatically generated and should not
 be edited by hand.
 
 ### Releasing
 
-We use lerna and conventional commits to update the changelog and tag releases.
-To tag a pre-release and generate the changelog, run:
+We use changesets to update the changelog and tag releases.
+
+To select which packages to update, run:
 
 ```
-yarn lerna version --conventional-commits --conventional-prerelease  --preid rc
+pnpm changeset
 ```
-Use `--conventional-graduate` to generate the tags for a stable release.
+
+To tag a release and generate the changelog, run:
+
+```
+pnpm changeset version
+```
+
+Run `pnpm install`. This will update the lockfile and rebuild packages.
 
 To publish the pre-release to npm, run:
 ```
-yarn lerna publish from-package --dist-tag next
+pnpm publish -r --tag next
 ```
 To publish a stable release, use `latest` instead of `next`.
 

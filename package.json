@@ -4,17 +4,16 @@
   "scripts": {
     "all-contributors": "all-contributors add",
     "lint": "eslint . --cache --ignore-path .gitignore",
-    "fixlint": "yarn lint -- --fix",
-    "prepare": "lerna run --stream prepare",
+    "fixlint": "pnpm lint -- --fix",
     "build:metadata": "babel-node ./util/buildMetadata.js",
-    "build:docs": "remark site/docs/**/*.md -o && yarn build:metadata && babel-node ./util/buildSiteMarkdown.js",
+    "build:docs": "remark site/docs/**/*.md -o && pnpm build:metadata && babel-node ./util/buildSiteMarkdown.js",
     "build:integration": "cross-env BABEL_ENV=test babel-node ./util/buildFrameworks.js",
-    "pretest": "yarn lint",
+    "pretest": "pnpm lint",
     "test:only": "cross-env BABEL_ENV=test jest",
     "test:coverage": "cross-env BABEL_ENV=test jest --coverage",
-    "test": "yarn test:coverage",
-    "deploy": "cd site && GIT_USER=anikethsaha yarn deploy",
-    "publish": "lerna publish"
+    "test": "pnpm test:coverage",
+    "deploy": "cd site && GIT_USER=anikethsaha pnpm deploy",
+    "publish": "pnpm publish -r"
   },
   "workspaces": [
     "./packages/*"
@@ -27,6 +26,7 @@
     "@babel/core": "^7.14.3",
     "@babel/node": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
+    "@changesets/cli": "^2.16.0",
     "all-contributors-cli": "^6.20.0",
     "babel-jest": "^27.0.1",
     "babel-plugin-add-module-exports": "^1.0.2",
@@ -46,7 +46,6 @@
     "html-to-text": "^8.0.0",
     "jest": "^27.0.1",
     "jest-junit": "^12.1.0",
-    "lerna": "4.0.0",
     "mdast-util-heading-range": "^2.1.2",
     "node-fetch": "^2.6.1",
     "pleeease-filters": "^4.0.0",
